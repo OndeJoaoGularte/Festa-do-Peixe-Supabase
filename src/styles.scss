@@ -1,9 +1,58 @@
 :root {
-  --cor-primaria: #4699ae;     /* Azul Escuro (Marinho) */
-  --cor-secundaria: #1B4965;   /* Azul Claro (Oceano) */
+  --cor-primaria: #4699ae;     /* Azul Claro (Oceano) */
+  --cor-secundaria: #1B4965;   /* Azul Escuro (Marinho) */
   --cor-destaque: #D4A373;     /* Marrom Pastel/Areia */
   --cor-fundo: #F4F1DE;        /* Fundo Bege/Areia bem claro */
   --cor-texto: #2C363F;        /* Texto Escuro (quase preto) */
   --cor-texto-claro: #ffffff;
   --fonte-principal: "Nunito", sans-serif;
+}
+
+body {
+  font-family: var(--fonte-principal);
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  overflow-x: hidden;
+}
+
+/*
+  Páginas completas e Seções Intercaladas
+*/
+
+.fest-intro {
+  /* Introdução das páginas internas */
+  padding: 4rem 0 2rem;
+}
+
+.fest-section-light {
+  /* Section com fundo branco */
+  padding: 5rem 0;
+  background-color: #fff;
+}
+
+.fest-section-bg {
+  /* Section com fundo areia/marrom (para dinamismo visual) */
+  padding: 5rem 0;
+  background-color: var(--cor-fundo);
+}
+
+.fest-title {
+  /* Título principal das seções */
+  font-weight: 800;
+  color: var(--cor-secundaria);
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+
+  /* Sublinhado rústico com a cor de destaque */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--cor-destaque);
+    border-radius: 2px;
+  }
 }

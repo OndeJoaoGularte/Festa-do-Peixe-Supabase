@@ -1,13 +1,220 @@
-.construction-container {
-    min-height: 60vh; /* Ocupa uma boa parte da tela */
+/* Hero Banner
+*/
+.hero-banner {
+  /* Calcula a altura total da tela menos os 85px do Header para não gerar rolagem extra */
+  height: calc(100vh - 85px); 
+  background-image: url('https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?q=80&w=1974&auto=format&fit=crop'); /* Placeholder do mar */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Efeito Parallax suave ao rolar a tela */
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradiente escuro apenas na direita, garantindo leitura perfeita dos botões */
+    background: linear-gradient(90deg, rgba(27,73,101,0) 0%, rgba(27,73,101,0.85) 100%); 
+  }
+
+  .hero-actions {
+    max-width: 450px;
+    width: 100%;
+  }
+
+  .btn-hero {
+    padding: 1.2rem 2rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    font-size: 1rem;
+  }
+
+  .btn-destaque {
+    background-color: var(--cor-destaque);
+    border: 2px solid var(--cor-destaque);
+    color: var(--cor-texto);
+    
+    &:hover {
+      background-color: #c09162; /* Tom levemente escurecido do destaque */
+      border-color: #c09162;
+      color: #fff;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+  }
+
+  .btn-outline-light {
+    border: 2px solid #fff;
+    
+    &:hover {
+      background-color: #fff;
+      color: var(--cor-primaria);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+  }
 }
 
-.icon-wrapper {
-    animation: bounce 2s infinite;
+/* Seção Sobre
+*/
+.fest-section-light {
+  padding: 6rem 0;
+  background-color: #fff;
 }
 
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-    40% {transform: translateY(-20px);}
-    60% {transform: translateY(-10px);}
+.fest-title {
+  font-weight: 800;
+  color: var(--cor-primaria);
+  position: relative;
+  display: inline-block;
+
+  /* Um sublinhado rústico com a cor de destaque */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--cor-destaque);
+    border-radius: 2px;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero-banner {
+    .overlay {
+      /* Em telas menores, o gradiente cobre tudo para garantir leitura */
+      background: rgba(27,73,101,0.7); 
+    }
+    
+    .hero-actions {
+      align-items: center !important;
+    }
+    
+    .hero-text {
+      text-align: center !important;
+    }
+  }
+}
+
+/* Carrossel de Programação */
+.carousel-img {
+  height: 400px;
+  object-fit: cover;
+}
+
+.text-primary-fest {
+  color: var(--cor-primaria);
+}
+
+.carousel-desc {
+  border-top: 4px solid var(--cor-destaque);
+}
+
+/* Ajusta a posição dos indicadores do carrossel para ficarem sobre a parte branca */
+.carousel-indicators {
+  bottom: 10px;
+  
+  button {
+    background-color: var(--cor-primaria) !important;
+    height: 6px !important;
+    border-radius: 4px;
+  }
+}
+
+/* Logos dos Patrocinadores */
+.sponsor-link {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.sponsor-img {
+  max-width: 180px;
+  filter: grayscale(100%) opacity(70%); /* Deixa em tons de cinza e um pouco opaco */
+  transition: all 0.4s ease;
+  
+  &:hover {
+    filter: grayscale(0%) opacity(100%); /* Retorna as cores originais no hover */
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-img {
+    height: 250px;
+  }
+  .sponsor-img {
+    max-width: 120px;
+  }
+}
+
+/* Galeria de Programação */
+.text-primary-fest {
+  color: var(--cor-primaria);
+}
+
+.gallery-btn {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-width: 2px;
+}
+
+.thumb-gallery {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1rem 0.5rem;
+  scroll-behavior: smooth;
+  
+  /* Esconde a barra de rolagem para ficar mais elegante */
+  &::-webkit-scrollbar { display: none; }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.thumb-img {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 4px solid transparent;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  /* Efeito de hover nas imagens não selecionadas */
+  &:hover:not(.active) {
+    opacity: 0.8;
+    transform: translateY(-2px);
+  }
+
+  /* Estado ativo (A imagem "selecionada") */
+  &.active {
+    opacity: 1;
+    border-color: var(--cor-destaque);
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+  }
+}
+
+/* Ajustes para telas de celular */
+@media (max-width: 768px) {
+  .thumb-img {
+    width: 120px;
+    height: 90px;
+  }
+  .gallery-btn {
+    width: 40px;
+    height: 40px;
+  }
 }
